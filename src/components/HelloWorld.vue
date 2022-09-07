@@ -8,9 +8,6 @@
 
 <script>
 const axios = require('axios');
-axios.defaults.headers.get['Accepts'] = 'application/json';
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 
 export default {
   name: 'HelloWorld',
