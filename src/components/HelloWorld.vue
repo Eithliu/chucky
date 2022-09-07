@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h3>{{ info.joke }}</h3>
+    <h3 class="my-citation">{{ result.data.joke }}</h3>
     <button class="my-btn">Une autre citation !</button>
   </div>
 </template>
@@ -16,21 +16,23 @@ export default {
   },
   data() {
     return {
-      info: null,
+      result: null,
     }
   },
   mounted() {
     axios
       .get('https://chuckn.neant.be/api/rand')
-      .then(response => (this.info = response))
+      .then(response => (this.result = response))
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
+h3.my-citation {
   margin: 40px 0 0;
+  margin-bottom: 5rem;
+
 }
 button.my-btn {
   background-color: #607196;
