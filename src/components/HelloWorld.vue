@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h3 class="my-citation">{{ result.data.joke }}</h3>
-    <button class="my-btn">Une autre citation !</button>
+    <h3 class="my-citation" v-bind="result" :key="result.id">{{ result }}</h3>
+    <button class="my-btn" @click="getChuckFact">Une autre citation !</button>
   </div>
 </template>
 
@@ -21,8 +21,15 @@ export default {
   },
   mounted() {
     axios
-      .get('https://chuckn.neant.be/api/rand')
-      .then(response => (this.result = response))
+      .get('https://api.chucknorris.io/jokes/random')
+      .then(response => (this.result = response.data.value))
+  },
+  methods: {
+    getChuckFact: () => {
+      axios
+      .get('https://api.chucknorris.io/jokes/random')
+      .then(response => (response.data.joke))
+    }
   }
 }
 </script>
@@ -32,6 +39,7 @@ export default {
 h3.my-citation {
   margin: 40px 0 0;
   margin-bottom: 5rem;
+  text-align: center;
 
 }
 button.my-btn {
