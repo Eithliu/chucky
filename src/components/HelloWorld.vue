@@ -1,8 +1,13 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h3 class="my-citation" v-bind="result" :key="result.id">{{ result }}</h3>
-    <button class="my-btn" @click="getChuckFact">Une autre citation !</button>
+    <div v-if="result != null">
+      <h3 class="my-citation" v-bind="result" :key="result.id">{{ result }}</h3>
+      <button class="my-btn" @click="getChuckFact">Une autre citation !</button>
+    </div>
+    <div v-else>
+      <button class="my-btn" @click="getChuckFact">Une citation !</button>
+    </div>
   </div>
 </template>
 
@@ -19,16 +24,11 @@ export default {
       result: null,
     }
   },
-  mounted() {
-    axios
-      .get('https://api.chucknorris.io/jokes/random')
-      .then(response => (this.result = response.data.value))
-  },
   methods: {
-    getChuckFact: () => {
+    getChuckFact() {
       axios
       .get('https://api.chucknorris.io/jokes/random')
-      .then(response => (response.data.joke))
+      .then(response => (this.result = response.data.value))
     }
   }
 }
